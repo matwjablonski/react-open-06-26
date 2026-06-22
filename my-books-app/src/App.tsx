@@ -1,4 +1,5 @@
 import './App.css'
+import { Footer } from './components/Footer/Footer';
 import { books } from './data/books';
 
 const author = 'Mateusz Jabłoński';
@@ -13,9 +14,7 @@ function App() {
           <li key={`book-${book.id}`}>{book.title} - {book.author}</li>
         ))}
       </ul>
-      <footer>
-        Aplikacja przygotowana przez {author}
-      </footer>
+      <Footer author={author} />
     </div>
   )
 }
