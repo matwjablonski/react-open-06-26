@@ -1,14 +1,9 @@
-export interface BookType {
-  title: string;
-  author: string;
-  id: number;
-  publicationDate?: string;
-}
+import type { BookType } from "../types/book";
 
 export const books: BookType[] = [
-  { title: 'Anna Karenina', author: 'Lew Tołstoj', id: 1, publicationDate: '1877' },
-  { title: 'Wojna i pokój', author: 'Lew Tołstoj', id: 2, publicationDate: '1869' },
-  { title: 'Zbrodnia i kara', author: 'Fiodor Dostojewski', id: 3, publicationDate: '1866' },
-  { title: 'Pan Tadeusz', author: 'Adam Mickiewicz', id: 4, publicationDate: '1834' },
-  { title: 'Mały Książę', author: 'Antoine de Saint-Exupéry', id: 5, publicationDate: '1943' },
+  { title: 'Anna Karenina', author: 'Lew Tołstoj', id: 1, publicationDate: '1877', polishTranslationDate: '1900'},
+  { title: 'Wojna i pokój', author: 'Lew Tołstoj', id: 2, publicationDate: '1869', polishTranslationDate: '1870' },
+  { title: 'Zbrodnia i kara', author: 'Fiodor Dostojewski', id: 3, publicationDate: '1866', polishTranslationDate: '1870' },
+  { title: 'Pan Tadeusz', author: 'Adam Mickiewicz', id: 4, publicationDate: '1834', polishTranslationDate: '1834' },
+  { title: 'Mały Książę', author: 'Antoine de Saint-Exupéry', id: 5, publicationDate: '1943', polishTranslationDate: '1950' },
 ];
