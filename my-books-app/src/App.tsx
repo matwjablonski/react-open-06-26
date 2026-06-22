@@ -1,5 +1,7 @@
 import './App.css'
+import { Books } from './components/Books/Books';
 import { Footer } from './components/Footer/Footer';
+import { Header } from './components/Header/Header';
 import { books } from './data/books';
 
 const author = 'Mateusz Jabłoński';
@@ -7,15 +9,11 @@ const author = 'Mateusz Jabłoński';
 function App() {
 
   return (
-    <div>
-      <h1>Witaj w naszej aplikacji książkowej</h1>
-      <ul>
-        {books.map((book) => (
-          <li key={`book-${book.id}`}>{book.title} - {book.author}</li>
-        ))}
-      </ul>
+    <>
+      <Header />
+      <Books books={books} />
       <Footer author={author} />
-    </div>
+    </>
   )
 }
 
