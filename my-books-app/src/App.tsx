@@ -6,6 +6,7 @@ import { Header } from './components/Header/Header';
 import { books } from './data/books';
 import { StateForm } from './components/StateForm/StateForm';
 import { RefForm } from './components/RefForm/RefForm';
+import { ContactForm } from './components/ContactForm/ContactForm';
 
 const author = 'Mateusz Jabłoński';
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+      <ContactForm />
       <input type="text" placeholder='Szukaj książki...' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
       <Header />
       <Books books={books} setState={setReadBooksIds} readBooksIds={readBooksIds} />

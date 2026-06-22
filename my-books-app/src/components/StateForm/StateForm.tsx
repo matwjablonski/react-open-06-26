@@ -1,7 +1,5 @@
 import { useState } from "react"
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {}
-
 export const StateForm = ({ children }: { children?: React.ReactNode }) => {
     // const [name, setName] = useState('');
     // const [email, setEmail] = useState('');
