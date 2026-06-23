@@ -8,11 +8,20 @@ type BooksProps = {
     readBooksIds: number[];
 }
 
-type BooksReducerAction = unknown;
+type BooksReducerAction = {
+    type: 'REMOVE_BOOK',
+    payload: {
+        id: number;
+    }
+};
 
 const booksReducer = (state: BookType[], action: BooksReducerAction): BookType[] => {
-
-    return [];
+    switch (action.type) {
+        case 'REMOVE_BOOK':
+            return state.filter((book) => book.id !== action.payload.id);
+        default: 
+            return state;
+    }
 }
 
 export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
@@ -29,7 +38,11 @@ export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
                 setHaveEnoughBooks(true)
             }   
         }
-    })
+    }, [updatedBooks]);
+
+    const handleRemoveBook = (id: number) => {
+        dispatch({ type: 'REMOVE_BOOK', payload: { id } });
+    }
 
     // const shouldHaveMoreBooks = () => {
     //     if (listRef && listRef?.current) {
@@ -43,18 +56,18 @@ export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
     // }
 
     useEffect(() => {
-        document.title = `Masz ${books.length} książek`;
+        document.title = `Masz ${updatedBooks.length} książek`;
 
         return () => {
             document.title = 'Witaj w aplikacji książkowej';
         }
-    }, [books.length]);
+    }, [updatedBooks.length]);
 
     return (
         <>
             {haveEnoghBooks ? <p>Masz masę książek</p> : <p>Zbieraj dalej</p>}
             <ul ref={listRef}>
-                {books.map((book) => (
+                {updatedBooks.map((book) => (
                     <li key={`book-${book.id}`}>
                         <Book 
                             // title={book.title} 
@@ -64,6 +77,7 @@ export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
                             {...book}
                             setState={setState} 
                             isRead={readBooksIds.includes(book.id)}
+                            onRemoveBook={handleRemoveBook}
                         />
                     </li>
                 ))}
