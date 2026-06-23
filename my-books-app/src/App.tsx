@@ -9,6 +9,9 @@ import { ContactForm } from './components/ContactForm/ContactForm';
 import { UserInfo } from './components/UserInfo/UserInfo';
 import { useBooks } from './hooks/useBooks';
 import { useReadersQuery } from './hooks/useReadersQuery';
+import { Route, Routes } from 'react-router-dom';
+import { MainLayout } from './layouts/MainLayout';
+import { Home } from './pages/Home';
 // import { useApi } from './hooks/useApi';
 
 const author = 'Mateusz Jabłoński';
@@ -24,18 +27,30 @@ function App() {
   // useApi('https://jsonplaceholder.typicode.com/users');
 
   console.log('readers', readers);
-  
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<MainLayout author={author} />}>
+          <Route index element={<Home />} />
+          <Route path="books/:id" element={<BookPage />} />
+        </Route>
+      </Routes>
+    </>
+  )
+
 
   return (
     <>
       <ContactForm />
       <input type="text" placeholder='Szukaj książki...' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-      <Header>
-        <UserInfo name={author} />
-      </Header>
+      
+
+
+
       <button onClick={() => setShowBooks((prev) => !prev)}>Pokaż / ukryj książki</button>
       {showBooks && !loading && <Books books={books} setState={setReadBooksIds} readBooksIds={readBooksIds} />}
-      <Footer author={author} />
+      
 
       <StateForm>
         <div>!!!! tjestem tutaj</div>
