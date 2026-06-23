@@ -14,6 +14,7 @@ const author = 'Mateusz Jabłoński';
 function App() {
   const [readBooksIds, setReadBooksIds] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showBooks, setShowBooks] = useState(true);
 
   console.log('readBooksIds', readBooksIds);
 
@@ -24,7 +25,8 @@ function App() {
       <Header>
         <UserInfo name={author} />
       </Header>
-      <Books books={books} setState={setReadBooksIds} readBooksIds={readBooksIds} />
+      <button onClick={() => setShowBooks((prev) => !prev)}>Pokaż / ukryj książki</button>
+      {showBooks && <Books books={books} setState={setReadBooksIds} readBooksIds={readBooksIds} />}
       <Footer author={author} />
 
       <StateForm>

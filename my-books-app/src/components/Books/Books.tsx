@@ -33,6 +33,14 @@ export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
     //     return false;
     // }
 
+    useEffect(() => {
+        document.title = `Masz ${books.length} książek`;
+
+        return () => {
+            document.title = 'Witaj w aplikacji książkowej';
+        }
+    }, [books.length]);
+
     return (
         <>
             {haveEnoghBooks ? <p>Masz masę książek</p> : <p>Zbieraj dalej</p>}
