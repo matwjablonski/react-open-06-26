@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { BookType } from "../../types/book";
+import { Button } from "../Button/Button";
 
 type BookProps = {
     setState: React.Dispatch<React.SetStateAction<number[]>>;
@@ -23,13 +24,13 @@ export const Book = ({ title, author, id, publicationDate, setState, isRead = fa
             <p>Autor: {author}</p>
             {publicationDate && <p>Data publikacji: {publicationDate}</p>}
             {!isRead ? (
-                <button onClick={handleAddToReadBooks}>Dodaj do przeczytanych</button>
+                <Button onClick={handleAddToReadBooks}>Dodaj do przeczytanych</Button>
             ) : (
-                <button onClick={handleRemoveFromReadBooks}>Usuń z przeczytanych</button>
+                <Button onClick={handleRemoveFromReadBooks}>Usuń z przeczytanych</Button>
             )}
             <p>Oddano głosów: {votes}</p>
-            <button onClick={() => setVotes((prevValue) => prevValue + 1)}>Głosuj na tę pozycję</button>
-            <button onClick={() => onRemoveBook?.(id)}>Usuń książkę z list</button>
+            <Button onClick={() => setVotes((prevValue) => prevValue + 1)}>Głosuj na tę pozycję</Button>
+            <Button onClick={() => onRemoveBook?.(id)}>Usuń książkę z list</Button>
         </div>
     )
 }

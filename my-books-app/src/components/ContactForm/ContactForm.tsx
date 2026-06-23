@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Form } from "../Form/Form"
 import { Input } from "../Input/Input"
+import { Button } from "../Button/Button";
 
 export const ContactForm = () => {
     const nameInputRef = useRef<HTMLInputElement>(null);
@@ -27,12 +28,12 @@ export const ContactForm = () => {
 
     return (
         <>
-            <button onClick={handleFocusNameInput}>Napisz do nas</button>
+            <Button onClick={handleFocusNameInput}>Napisz do nas</Button>
             <Form title="Contact us" onSubmit={() => console.log('Form submitted', formData)}>
                 <Input name="name" type="text" label="Name" value={formData.name} onChange={handleChangeFormData} ref={nameInputRef} />
                 <Input name="message" type="text" label="Message" value={formData.message} onChange={handleChangeFormData} />
                 <Input name="phoneNumber" type="text" label="Phone Number" value={formData.phoneNumber} onChange={handleChangeFormData} />
-                <button type="submit">Submit</button>
+                <Button type="submit">Submit</Button>
             </Form>
         </>
     )

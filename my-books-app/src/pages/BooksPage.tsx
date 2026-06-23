@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useBooks } from "../hooks/useBooks";
 import { Books } from "../components/Books/Books";
+import { ButtonSecondary } from "../components/Button/Button";
 
 export const BooksPage = () => {
     const [readBooksIds, setReadBooksIds] = useState<number[]>([]);
@@ -9,7 +10,7 @@ export const BooksPage = () => {
 
     return (
         <div>
-            <button onClick={() => setShowBooks((prev) => !prev)}>Pokaż / ukryj książki</button>
+            <ButtonSecondary onClick={() => setShowBooks((prev) => !prev)}>Pokaż / ukryj książki</ButtonSecondary>
             {showBooks && !loading && <Books books={books} setState={setReadBooksIds} readBooksIds={readBooksIds} />}
         </div>
     )

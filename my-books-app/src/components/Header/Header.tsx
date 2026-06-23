@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import styles from './Header.module.css';
 
 type HeaderProps = {
     children: React.ReactNode;
 }
 
 export const Header = ({ children }: HeaderProps) => (
-    <header>
+    <header className={styles.header}>
         <h1>Witaj w naszej aplikacji książkowej</h1>
         {children}
         <nav>

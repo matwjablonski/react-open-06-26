@@ -12,7 +12,9 @@ export const MainLayout = ({ author }: MainLayoutProps  ) => (
         <Header>
             <UserInfo name={author} />
         </Header>
-        <Outlet />
+        <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '1rem' }}>
+            <Outlet />
+        </main>
         <Footer author={author} />
     </>
 )
