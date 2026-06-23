@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { BookType } from "../../types/book";
 
 type BookProps = {
@@ -6,6 +7,7 @@ type BookProps = {
 } & Omit<BookType, 'polishTranslationDate'>;
 
 export const Book = ({ title, author, id, publicationDate, setState, isRead = false }: BookProps) => {
+    const [votes, setVotes] = useState(() => Math.round(author.split(' ').pop()?.length ?? 0 * 2 / 5));
     const handleRemoveFromReadBooks = () => {
         setState((prevValue) => prevValue.filter((bookId) => bookId !== id));
     }
@@ -24,6 +26,8 @@ export const Book = ({ title, author, id, publicationDate, setState, isRead = fa
             ) : (
                 <button onClick={handleRemoveFromReadBooks}>Usuń z przeczytanych</button>
             )}
+            <p>Oddano głosów: {votes}</p>
+            <button onClick={() => setVotes((prevValue) => prevValue + 1)}>Głosuj na tę pozycję</button>
         </div>
     )
 }
