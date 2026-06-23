@@ -11,7 +11,8 @@ export const Header = ({ children }: HeaderProps) => (
         <nav>
             <Link to="/">Strona główna</Link>
             <Link to="/books">Książki</Link>
-            <Link to="/authors">Autorzy</Link>
+            <Link to="/readers">Autorzy</Link>
+            <Link to="/contact">Kontakt</Link>
         </nav>
     </header>
 )
