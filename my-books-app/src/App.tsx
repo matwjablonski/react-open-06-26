@@ -8,7 +8,8 @@ import { RefForm } from './components/RefForm/RefForm';
 import { ContactForm } from './components/ContactForm/ContactForm';
 import { UserInfo } from './components/UserInfo/UserInfo';
 import { useBooks } from './hooks/useBooks';
-import { useApi } from './hooks/useApi';
+import { useReadersQuery } from './hooks/useReadersQuery';
+// import { useApi } from './hooks/useApi';
 
 const author = 'Mateusz Jabłoński';
 
@@ -18,7 +19,12 @@ function App() {
   const [showBooks, setShowBooks] = useState(true);
   const { books, loading, error } = useBooks();
 
-  useApi('https://jsonplaceholder.typicode.com/users');
+  const { data: readers, isLoading: readersLoading, error: readersError } = useReadersQuery();
+
+  // useApi('https://jsonplaceholder.typicode.com/users');
+
+  console.log('readers', readers);
+  
 
   return (
     <>
