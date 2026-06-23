@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Form } from "../Form/Form"
 import { Input } from "../Input/Input"
 
 export const ContactForm = () => {
+    const nameInputRef = useRef<HTMLInputElement>(null);
     const [formData, setFormData] = useState({
         name: '',
         message: '',
@@ -14,12 +15,19 @@ export const ContactForm = () => {
         setFormData({ ...formData, [name]: value });
     }
 
+    const handleFocusNameInput = () => {
+        nameInputRef.current?.focus();
+    }
+
     return (
-        <Form title="Contact us" onSubmit={() => console.log('Form submitted', formData)}>
-            <Input name="name" type="text" label="Name" value={formData.name} onChange={handleChangeFormData} />
-            <Input name="message" type="text" label="Message" value={formData.message} onChange={handleChangeFormData} />
-            <Input name="phoneNumber" type="text" label="Phone Number" value={formData.phoneNumber} onChange={handleChangeFormData} />
-            <button type="submit">Submit</button>
-        </Form>
+        <>
+            <button onClick={handleFocusNameInput}>Napisz do nas</button>
+            <Form title="Contact us" onSubmit={() => console.log('Form submitted', formData)}>
+                <Input name="name" type="text" label="Name" value={formData.name} onChange={handleChangeFormData} ref={nameInputRef} />
+                <Input name="message" type="text" label="Message" value={formData.message} onChange={handleChangeFormData} />
+                <Input name="phoneNumber" type="text" label="Phone Number" value={formData.phoneNumber} onChange={handleChangeFormData} />
+                <button type="submit">Submit</button>
+            </Form>
+        </>
     )
 }
