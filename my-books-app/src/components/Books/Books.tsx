@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import type { BookType } from "../../types/book";
 import { Book } from "../Book/Book";
 
@@ -8,9 +8,18 @@ type BooksProps = {
     readBooksIds: number[];
 }
 
+type BooksReducerAction = unknown;
+
+const booksReducer = (state: BookType[], action: BooksReducerAction): BookType[] => {
+
+    return [];
+}
+
 export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
     const listRef = useRef<HTMLUListElement>(null);
     const [haveEnoghBooks, setHaveEnoughBooks] = useState(false);
+
+    const [ updatedBooks, dispatch ] = useReducer(booksReducer, books);
 
     useEffect(() => {
         if (listRef.current) {
