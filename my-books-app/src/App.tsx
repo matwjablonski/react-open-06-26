@@ -15,16 +15,6 @@ const NoAccessPage = lazy(() => import('./pages/NoAccess').then(module => ({ def
 const author = 'Mateusz Jabłoński';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  }
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-  }
-
   return (
     <>
       <Suspense fallback={<div>Ładowanie...</div>}>
@@ -32,9 +22,6 @@ function App() {
           <Route path="/" element={
             <MainLayout
               author={author}
-              onLogin={handleLogin}
-              isAuthenticated={isAuthenticated}
-              onLogout={handleLogout}
             />
           }>
             <Route index element={<HomePage />} />
@@ -42,7 +29,7 @@ function App() {
             <Route path="books/:id" element={<BookPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="readers" element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute>
                 <ReadersPage />
               </ProtectedRoute>
             } />

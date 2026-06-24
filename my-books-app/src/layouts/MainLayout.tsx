@@ -6,25 +6,36 @@ import { Modal } from "../components/Modal/Modal";
 import { LoginForm } from "../components/LoginForm/LoginForm";
 import { ButtonSecondary } from "../components/Button/Button";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../slices/User.slice";
+import type { RootState } from "../store/store";
 
 type MainLayoutProps = {
     author: string;
-    isAuthenticated?: boolean;
-    onLogin: () => void;
-    onLogout: () => void;
 }
 
-export const MainLayout = ({ author, onLogin, onLogout, isAuthenticated }: MainLayoutProps  ) => {
+export const MainLayout = ({ author }: MainLayoutProps  ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state: RootState) => state.user.isLoggedIn);
+    const userName = useSelector((state: RootState) => state.user.name);
     
+    const handleLogin = () => {
+        dispatch(userActions.login({ name: author }));
+    }
+
+    const handleLogout = () => {
+        dispatch(userActions.logout());
+    }
+
     return (
         <>
             <Header>
-                {isAuthenticated && <UserInfo name={author} />}
-                {!isAuthenticated ? <ButtonSecondary onClick={() => setIsModalOpen(true)}>Logowanie</ButtonSecondary> : <ButtonSecondary onClick={() => onLogout()}>Wyloguj</ButtonSecondary>}
+                {isAuthenticated && userName && <UserInfo name={userName} />}
+                {!isAuthenticated ? <ButtonSecondary onClick={() => setIsModalOpen(true)}>Logowanie</ButtonSecondary> : <ButtonSecondary onClick={handleLogout}>Wyloguj</ButtonSecondary>}
                 <Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen}>
                     <LoginForm onLogin={() => {
-                        onLogin();
+                        handleLogin()
                         setIsModalOpen(false);
                     }} />
                 </Modal>
