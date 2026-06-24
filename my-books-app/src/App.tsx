@@ -8,18 +8,33 @@ import { ContactPage } from './pages/ContactPage';
 import { BooksPage } from './pages/BooksPage';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { NoAccessPage } from './pages/NoAccess';
+import { useState } from 'react';
 // import { useApi } from './hooks/useApi';
 
 const author = 'Mateusz Jabłoński';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const isAuthenticated = true;
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  }
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  }
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<MainLayout author={author} />}>
+        <Route path="/" element={
+          <MainLayout
+            author={author}
+            onLogin={handleLogin}
+            isAuthenticated={isAuthenticated}
+            onLogout={handleLogout}
+          />
+        }>
           <Route index element={<HomePage />} />
           <Route path="books" element={<BooksPage />} />
           <Route path="books/:id" element={<BookPage />} />
