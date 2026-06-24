@@ -2,7 +2,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 // import { useApi } from './hooks/useApi';
 
 const HomePage = lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));

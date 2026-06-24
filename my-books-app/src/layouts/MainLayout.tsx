@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../slices/User.slice";
 import type { RootState } from "../store/store";
+import { Search } from "../components/Search/Search";
 
 type MainLayoutProps = {
     author: string;
@@ -41,6 +42,7 @@ export const MainLayout = ({ author }: MainLayoutProps  ) => {
                 </Modal>
             </Header>
             <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '1rem' }}>
+                <Search />
                 <Outlet />
             </main>
             <Footer author={author} />
