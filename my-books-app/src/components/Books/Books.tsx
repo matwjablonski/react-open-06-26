@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import type { BookType } from "../../types/book";
 import { Book } from "../Book/Book";
+import { Notification } from "../Notification/Notification";
 
 type BooksProps = {
     books: BookType[];
@@ -27,6 +28,7 @@ const booksReducer = (state: BookType[], action: BooksReducerAction): BookType[]
 export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
     const listRef = useRef<HTMLUListElement>(null);
     const [haveEnoghBooks, setHaveEnoughBooks] = useState(false);
+    const [showNotification, setShowNotification] = useState(false);
 
     const [ updatedBooks, dispatch ] = useReducer(booksReducer, books);
 
@@ -42,6 +44,10 @@ export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
 
     const handleRemoveBook = (id: number) => {
         dispatch({ type: 'REMOVE_BOOK', payload: { id } });
+        setShowNotification(true);
+        setTimeout(() => {
+            setShowNotification(false);
+        }, 3000);
     }
 
     // const shouldHaveMoreBooks = () => {
@@ -82,6 +88,7 @@ export const Books = ({ books, setState, readBooksIds }: BooksProps) => {
                     </li>
                 ))}
             </ul>
+            {showNotification && <Notification message="Książka została usunięta" type="success" />}
         </>
     )
 }
