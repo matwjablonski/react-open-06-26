@@ -1,16 +1,16 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
-import { BookPage } from './pages/BookPage';
-import { ReadersPage } from './pages/ReadersPage';
-import { ContactPage } from './pages/ContactPage';
-import { BooksPage } from './pages/BooksPage';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
-import { NoAccessPage } from './pages/NoAccess';
 import { lazy, Suspense, useState } from 'react';
 // import { useApi } from './hooks/useApi';
 
 const HomePage = lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));
+const BooksPage = lazy(() => import('./pages/BooksPage').then(module => ({ default: module.BooksPage })));
+const BookPage = lazy(() => import('./pages/BookPage').then(module => ({ default: module.BookPage })));
+const ReadersPage = lazy(() => import('./pages/ReadersPage').then(module => ({ default: module.ReadersPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
+const NoAccessPage = lazy(() => import('./pages/NoAccess').then(module => ({ default: module.NoAccessPage })));
 
 const author = 'Mateusz Jabłoński';
 
