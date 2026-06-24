@@ -11,6 +11,9 @@ import { BooksPage } from './pages/BooksPage';
 const author = 'Mateusz Jabłoński';
 
 function App() {
+
+  const isAuthenticated = true;
+
   return (
     <>
       <Routes>

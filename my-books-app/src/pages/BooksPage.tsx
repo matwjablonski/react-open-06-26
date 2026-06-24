@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useBooks } from "../hooks/useBooks";
 import { Books } from "../components/Books/Books";
 import { ButtonSecondary } from "../components/Button/Button";
+// import { useApi } from "../hooks/useApi";
 
 export const BooksPage = () => {
     const [readBooksIds, setReadBooksIds] = useState<number[]>([]);
     const [showBooks, setShowBooks] = useState(true);
     const { books, loading } = useBooks();
+    // const { data: books, loading } = useApi('books.json', true);
 
     return (
         <div>

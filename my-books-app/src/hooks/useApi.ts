@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { buildApiUrl } from "../utils/buildApiUrl";
 
 type UseApiState<T> = {
     data: T[];
@@ -6,7 +7,7 @@ type UseApiState<T> = {
     error: string | null;
 }
 
-export const useApi = <T, >(endpoint: string) => {
+export const useApi = <T, >(endpoint: string, isLocalData = false) => {
     const [state, setState] = useState<UseApiState<T>>({
         data: [],
         loading: false,
@@ -16,8 +17,10 @@ export const useApi = <T, >(endpoint: string) => {
     const fetchData = async (controller: AbortController) => {
         setState((prevState) => ({ ...prevState, loading: true }));
 
+        const url = isLocalData ? endpoint : buildApiUrl(endpoint);
+
         try {
-            const response = await fetch(endpoint, { signal: controller.signal });
+            const response = await fetch(url, { signal: controller.signal });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
