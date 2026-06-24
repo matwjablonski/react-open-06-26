@@ -1,6 +1,5 @@
-import type { Theme } from "@emotion/react";
-import { ThemeContext, type ThemeContextType } from "../context/ThemeContext";
-import { useState } from "react";
+import { ThemeContext, type Theme } from "../context/ThemeContext";
+import { useMemo, useState } from "react";
 
 type ThemeProviderProps = {
     children: React.ReactNode;
@@ -9,7 +8,12 @@ type ThemeProviderProps = {
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     const [theme, setTheme] = useState<Theme>('light');
 
-    const themeContextValue = {} as ThemeContextType;
+    const themeContextValue = useMemo(() => ({
+        theme,
+        toggleTheme: () => {
+            setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+        }
+    }), [theme]);
 
     return (
         <ThemeContext.Provider value={themeContextValue}>
